@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:GroupsStudents01"
              StartupUri="Views/Windows/MainWindow.xaml">
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Templates/ModelMainView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
          
     </Application.Resources>
 </Application>

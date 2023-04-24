@@ -30,7 +30,12 @@ namespace GroupsStudents01.ViewModels
         public Group SelectedGroup
         {
             get => _SelectedGroup;
-            set => Set(ref _SelectedGroup, value);        
+            set
+            {
+                Set(ref _SelectedGroup, value);
+                OnShowGroupDetailViewCommandExecuted();
+            }
+            
         }
         #endregion
 
@@ -69,6 +74,30 @@ namespace GroupsStudents01.ViewModels
                       CurrentModel = new GroupDetailViewModel(SelectedGroup);
                   }));
             }
+        }
+        #endregion
+
+
+        #region Command ShowGroupDetailViewCommand2 - Отобразить представление группы
+        private RelayCommand showGroupDetailViewCommand2;
+        public RelayCommand ShowGroupDetailViewCommand2
+        {
+            get
+            {
+                return showGroupDetailViewCommand2 ??
+                  (showGroupDetailViewCommand2 = new RelayCommand(obj =>
+                  {
+                      // Group group = obj as _SelectedGroup;
+                      OnShowGroupDetailViewCommandExecuted();
+                  }));
+            }
+        }
+
+        
+        private void OnShowGroupDetailViewCommandExecuted()
+        {
+            // CurrentModel = new BookDetailViewModel(_BooksRepository, SelectedBook);
+            CurrentModel = new GroupDetailViewModel(SelectedGroup);
         }
         #endregion
 
