@@ -3,6 +3,6 @@
                     xmlns:vm="clr-namespace:GroupsStudents01.ViewModels"
                     xmlns:view="clr-namespace:GroupsStudents01.Views">
     <DataTemplate DataType="{x:Type vm:GroupDetailViewModel}">
-        <view:GroupDetailView DataContext="{Binding Group}"/>
+        <view:GroupDetailView/>
     </DataTemplate> 
 </ResourceDictionary>

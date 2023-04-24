@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading;
@@ -22,20 +23,20 @@ namespace GroupsStudents01.ViewModels
 {    
     internal class MainWindowViewModel : ViewModel
     {
-        public ObservableCollection<Group> Groups { get; }
-               
+        public ObservableCollection<GroupDetailViewModel> Groups { get; set; }
+
         #region SelectedGroup
-        private Group _SelectedGroup;
-        
-        public Group SelectedGroup
+        private GroupDetailViewModel _SelectedGroup;
+
+        public GroupDetailViewModel SelectedGroup
         {
             get => _SelectedGroup;
             set
             {
                 Set(ref _SelectedGroup, value);
-                OnShowGroupDetailViewCommandExecuted();
+
+                OnShowGroupDetailViewCommandExecuted(value);
             }
-            
         }
         #endregion
 
@@ -61,23 +62,7 @@ namespace GroupsStudents01.ViewModels
 
         #endregion
 
-        #region Command ShowGroupDetailViewCommand - Отобразить представление группы
-        private RelayCommand showGroupDetailViewCommand;
-        public RelayCommand ShowGroupDetailViewCommand
-        {
-            get
-            {
-                return showGroupDetailViewCommand ??
-                  (showGroupDetailViewCommand = new RelayCommand(obj =>
-                  {
-                      // Group group = obj as _SelectedGroup;
-                      CurrentModel = new GroupDetailViewModel(SelectedGroup);
-                  }));
-            }
-        }
-        #endregion
-
-
+        
         #region Command ShowGroupDetailViewCommand2 - Отобразить представление группы
         private RelayCommand showGroupDetailViewCommand2;
         public RelayCommand ShowGroupDetailViewCommand2
@@ -88,31 +73,40 @@ namespace GroupsStudents01.ViewModels
                   (showGroupDetailViewCommand2 = new RelayCommand(obj =>
                   {
                       // Group group = obj as _SelectedGroup;
-                      OnShowGroupDetailViewCommandExecuted();
+                      OnShowGroupDetailViewCommandExecuted(SelectedGroup);
                   }));
             }
         }
 
-        
-        private void OnShowGroupDetailViewCommandExecuted()
+
+        private void OnShowGroupDetailViewCommandExecuted(GroupDetailViewModel selectedGroup)
         {
-            // CurrentModel = new BookDetailViewModel(_BooksRepository, SelectedBook);
-            CurrentModel = new GroupDetailViewModel(SelectedGroup);
+            CurrentModel = selectedGroup;
+            Debug.Writline("=== === === ===");
+            Debug.Writline(selectedGroup.Description);
+            Debug.Writline("=== === === ===");
         }
         #endregion
+
+
+        public IEnumerable<GroupDetailViewModel> LoadData()
+        {
+            var groups = Enumerable.Range(1, 20).Select(
+                i => new GroupDetailViewModel
+                {
+                    Id = i,
+                    Name = $"Группа {i}",
+                    Description = $"Description {i}"
+                });
+
+            return groups;
+        }
 
         /* ---------------------------------- */
         #region Конструктор        
         public MainWindowViewModel()
-        {
-            var groups = Enumerable.Range(1, 20).Select(i => new Group
-            {
-                Id = i,
-                Name = $"Группа {i}",
-                Description = $"Description {i}",
-            });
-
-            Groups = new ObservableCollection<Group>(groups);        
+        {   
+            Groups = new ObservableCollection<GroupDetailViewModel>(LoadData());        
         }
         #endregion
         /* ---------------------------------- */

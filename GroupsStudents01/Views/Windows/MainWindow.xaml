@@ -23,13 +23,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <GroupBox Grid.Column="0" Header="Группы">
-                        <ListBox ItemsSource="{Binding Groups}" 
+                        <ListBox x:Name="ListBoxMenu"                    
+                                 ItemsSource="{Binding Groups}" 
                                  DisplayMemberPath="Name"
                                  SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"
                                  SelectedIndex="10"/>
                     </GroupBox>
                     <GroupBox Grid.Column="1" Header="Группа. Детали">
-                <ContentControl Content="{Binding CurrentModel}"/>
+                <ContentControl Content="{Binding ElementName=ListBoxMenu, Path=SelectedItem}"/>
             </GroupBox>
                 </Grid>
     </DockPanel>

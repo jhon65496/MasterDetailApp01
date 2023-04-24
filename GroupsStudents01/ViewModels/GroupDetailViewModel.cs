@@ -10,19 +10,36 @@ namespace GroupsStudents01.ViewModels
 {    
     internal class GroupDetailViewModel : ViewModel
     {
-        #region Group
-        private Group _group;
+        private int id;
 
-        public Group Group
+        public int Id
         {
-            get => _group;
-            set => Set(ref _group, value);
+            get { return id; }
+            set => Set(ref id, value);
         }
-        #endregion
 
-        public GroupDetailViewModel(Group group)
+
+        private string name;
+
+        public string Name
         {
-            _group = group;
+            get { return name; }
+            set => Set(ref name, value);
+        }
+
+
+        private string description;
+
+        public string Description
+        {
+            get { return description; }
+            set => Set(ref description, value);
+        }
+
+
+        public GroupDetailViewModel()
+        {
+
         }
     }
 }
