@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading;
@@ -82,9 +82,9 @@ namespace GroupsStudents01.ViewModels
         private void OnShowGroupDetailViewCommandExecuted(GroupDetailViewModel selectedGroup)
         {
             CurrentModel = selectedGroup;
-            Debug.Writline("=== === === ===");
-            Debug.Writline(selectedGroup.Description);
-            Debug.Writline("=== === === ===");
+            Debug.WriteLine("=== === === ===");
+            Debug.WriteLine(selectedGroup.Description);
+            Debug.WriteLine("=== === === ===");
         }
         #endregion
 
